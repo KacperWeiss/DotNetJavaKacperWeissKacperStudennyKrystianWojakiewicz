@@ -16,6 +16,7 @@ import javax.swing.KeyStroke;
 public class CrazyButtonGUI {
 
 	private TransparentFrame frame;
+	private InvisibleDialog invDialog;
 
 	/**
 	 * Launch the application.
@@ -25,7 +26,7 @@ public class CrazyButtonGUI {
 			public void run() {
 				try {
 					CrazyButtonGUI window = new CrazyButtonGUI();
-					window.frame.setVisible(true);
+					//window.invDialog.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -45,37 +46,33 @@ public class CrazyButtonGUI {
 	 */
 	private void initialize() {
 		
-		//Initialize the Transparent JFrame//
-		frame = new TransparentFrame();
+		
+	    //Initialize the Invisible Dialog//
+		InvisibleDialog invDialog = new InvisibleDialog();
 		
 		//Setup Action for Binding//
-		Action closeAction = new AbstractAction(){
-	        /**
-			 * 
-			 */
-			private static final long serialVersionUID = 1L;
+				Action closeAction = new AbstractAction(){
+			        
+					private static final long serialVersionUID = 1L;
 
-			public void actionPerformed(ActionEvent e){
-	        	int choice = JOptionPane.showConfirmDialog(frame, "Do you want to kill the Button :( ?");
-	            if(choice == 0) {
-	            	System.exit(0);
-	            }
-	        }
-	    };
-	    
-	    //Setup Input for Binding//
-	    KeyStroke esc = KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE,0);
-	    ((JComponent) frame.getContentPane()).getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(esc, "closex");
-	    ((JComponent) frame.getContentPane()).getActionMap().put("closex", closeAction);
+					public void actionPerformed(ActionEvent e){
+			        	int choice = JOptionPane.showConfirmDialog(frame, "Do you want to kill the Button :( ?");
+			            if(choice == 0) {
+			            	System.exit(0);
+			            }
+			        }
+			    };
+			    
+			    //Setup Input for Binding//
+			    KeyStroke esc = KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE,0);
+			    ((JComponent) invDialog.getContentPane()).getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(esc, "closex");
+			    ((JComponent) invDialog.getContentPane()).getActionMap().put("closex", closeAction);
 		
-	    //GET SCREEN INFO//
+		
+		
+		//GET SCREEN INFO//
 		final Dimension screenDim = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
-		
-		//set JFrame to fit the whole display//
-		frame.setSize(screenDim);
-		frame.setExtendedState(JFrame.MAXIMIZED_BOTH); 
-		
-		//Initialize the CrazyButton//
-		CrazyButton crazyBtn = new CrazyButton(frame, screenDim);
+		//invDialog.setSize(screenDim);
+		CrazyButton btn = new CrazyButton(invDialog, screenDim);
 	}
 }

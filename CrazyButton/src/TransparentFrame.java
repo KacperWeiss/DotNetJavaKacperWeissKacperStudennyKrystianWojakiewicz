@@ -1,6 +1,7 @@
 import java.awt.Color;
 
 import javax.swing.JFrame;
+import javax.swing.WindowConstants;
 
 
 public class TransparentFrame extends JFrame{
@@ -17,5 +18,7 @@ public class TransparentFrame extends JFrame{
 		setLocationRelativeTo(null);
 		setUndecorated(true);
 		setBackground(new Color(1.0f,1.0f,1.0f,0.0f));
+		setVisible(false);
+		setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
 	}
 }
